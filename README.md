@@ -11,6 +11,6 @@ set xlogwebhook "your discord webhook"
 # Log
 1. Edit server.cfg and add below text/code and save it
 ```
-set xwebhook "your discord webhook"
+set xlogwebhook "your discord webhook"
 ```
 2. Restart server and enjoy
