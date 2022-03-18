@@ -40,6 +40,25 @@ local function OnPlayerConnecting(name, setKickReason, deferrals)
 	end
 end
 AddEventHandler('playerConnecting', OnPlayerConnecting)
+-- drop
+local function OnPlayerDropped(reason)
+	local name = GetPlayerName(source)
+	if name == nil then
+		name = ''
+	end
+	local ip = GetPlayerEP(source)
+	if ip == nil then
+		ip = ''
+	end
+	local reason = reason
+	if reason == nil then
+		reason = ''
+	end
+	if xlogwebhook ~= 'none' then
+		PerformHttpRequest(xlogwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Player Dropped**```name:'..name..'\nreason:'..reason..'\nip:'..ip..'```'}), { ['Content-Type'] = 'application/json' })
+	end
+end
+AddEventHandler('playerDropped', OnPlayerDropped)
 -- chat
 AddEventHandler('chatMessage', function(source, author, message)
 	local name = GetPlayerName(source)
